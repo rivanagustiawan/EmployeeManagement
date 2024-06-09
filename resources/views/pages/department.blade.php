@@ -36,7 +36,7 @@
                                 {{ $department->total_employee }}
                             </td>
                             <td class="flex flex-col space-y-2 py-2">
-                                <a href="#" class="py-1 text-center text-xs font-light bg-yellow-100">Edit</a>
+                                <a href="/department/edit/{{ $department->id }}" class="py-1 text-center text-xs font-light bg-yellow-100">Edit</a>
                                 <a href="/department/employee/{{ $department->id }}" class="py-1 text-center text-xs font-light bg-green-300">Show Employee</a>
                                 <a href="#" class="py-1 text-center text-xs font-light bg-red-300">Delete</a>
                             </td>

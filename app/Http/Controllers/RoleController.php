@@ -29,4 +29,30 @@ class RoleController extends Controller
         return redirect('role')->with('success', 'Success Add New Department');
 
     }
+
+    public function edit($id)
+    {
+        $employee = Role::where('id', $id)->first();
+
+        if (!$employee) {
+            return redirect()->route('role')->with('error', 'Employee not found');
+        }
+
+        return view('pages.roles-edit', [
+            'role' => $employee,
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Role::where('id', $id)->update([
+            'name' => $request->name
+        ]);
+
+        return redirect('role')->with('success', 'Success Edit Role');
+
+    }
 }

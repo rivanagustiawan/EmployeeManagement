@@ -52,7 +52,7 @@
                                 @endforeach
                             </td>
                             <td class="flex flex-col space-y-2 py-2">
-                                <button class="py-1 text-xs font-light bg-yellow-100">Edit</button>
+                                <a href="/employee/edit/{{ $employee->id }}" class="py-1 text-xs font-light bg-yellow-100 text-center"><button >Edit</button></a> 
                                 <button class="py-1 text-xs font-light bg-red-300">Delete</button>
                             </td>
                         </tr>

@@ -9,12 +9,13 @@
                     {!! \Session::get('error') !!}
                 </div>
             @endif
-            <form action="/role/add" method="POST">
+            <form action="/role/update/{{ $role->id }}" method="POST">
             @csrf
+            @method('put')
             <div class="grid grid-cols-2 gap-5">
                     <div class="mb-5 w-full">
                         <label for="name" class="block mb-2 text-sm font-medium text-black">Nama Role</label>
-                        <input type="text" name="name" class="bg-gray-100 border-[1px] py-3 px-6  rounded-lg w-full @error('name') border-red-500 @enderror" placeholder="name is" value="{{ old('name') }}" />
+                        <input type="text" name="name" class="bg-gray-100 border-[1px] py-3 px-6  rounded-lg w-full @error('name') border-red-500 @enderror" placeholder="name is" value="{{ old('name', $role->name) }}" />
                         @error('name')
                             <p class="text-xs text-red-600">{{ $message }}</p>
                         @enderror

@@ -49,4 +49,30 @@ class DepartmentController extends Controller
         return redirect('department')->with('success', 'Success Add New Department');
 
     }
+
+    public function edit($id)
+    {
+        $department = Department::where('id', $id)->first();
+
+        if (!$department) {
+            return redirect()->route('department')->with('error', 'Employee not found');
+        }
+
+        return view('pages.department-edit', [
+            'department' => $department,
+        ]);
+    }
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Department::where('id', $id)->update([
+            'name' => $request->name
+        ]);
+
+        return redirect('department')->with('success', 'Success Edit Department');
+
+    }
 }
