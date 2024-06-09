@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class DepartmentController extends Controller
 {
@@ -52,6 +53,11 @@ class DepartmentController extends Controller
 
     public function edit($id)
     {
+
+        if(Gate::denies('update')) {
+            return redirect('/department')->with('error', 'Only Admin / Super Admin Access.');
+        }
+
         $department = Department::where('id', $id)->first();
 
         if (!$department) {
@@ -64,6 +70,10 @@ class DepartmentController extends Controller
     }
 
     public function update(Request $request, $id) {
+        if(Gate::denies('update')) {
+            return redirect('/department')->with('error', 'Only Admin / Super Admin Access.');
+        }
+        
         $request->validate([
             'name' => 'required'
         ]);

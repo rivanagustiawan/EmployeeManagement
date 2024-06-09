@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
 
 class EmployeeController extends Controller
@@ -69,6 +70,10 @@ class EmployeeController extends Controller
 
     public function edit($id)
     {
+        if(Gate::denies('update')) {
+            return redirect('/employee')->with('error', 'Only Admin / Super Admin Access.');
+        }
+
         $employee = Employee::where('id', $id)->with('roles')->first();
 
         if (!$employee) {
@@ -83,7 +88,10 @@ class EmployeeController extends Controller
     }
 
     public function update(Request $request, $id) {
-
+        if(Gate::denies('update')) {
+            return redirect('/employee')->with('error', 'Only Admin / Super Admin Access.');
+        }
+        
         $request->validate([
             'name' => 'required',
             'email' => 'required',

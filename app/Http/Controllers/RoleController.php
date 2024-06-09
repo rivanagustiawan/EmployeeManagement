@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -32,6 +33,11 @@ class RoleController extends Controller
 
     public function edit($id)
     {
+
+        if(Gate::denies('update')) {
+            return redirect('/role')->with('error', 'Only Admin / Super Admin Access.');
+        }
+        
         $employee = Role::where('id', $id)->first();
 
         if (!$employee) {
@@ -44,6 +50,10 @@ class RoleController extends Controller
     }
 
     public function update(Request $request, $id) {
+        if(Gate::denies('update')) {
+            return redirect('/role')->with('error', 'Only Admin / Super Admin Access.');
+        }
+        
         $request->validate([
             'name' => 'required'
         ]);

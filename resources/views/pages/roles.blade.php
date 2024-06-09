@@ -12,6 +12,11 @@
                     {!! \Session::get('success') !!}
                 </div>
             @endif
+            @if (\Session::has('error'))
+                <div class="bg-red-300 w-full px-6 py-6 rounded-md mb-4">
+                    {!! \Session::get('error') !!}
+                </div>
+            @endif
             <table class="w-full text-sm text-left rtl:text-right bg-white shadow-lg">
                 <thead class="text-xs text-gray-700 uppercase border-b ">
                     <tr>
