@@ -2,8 +2,16 @@
 
 @section('dashboard')
 <div class="px-12">
-    <p class="text-xl font-bold">List Department</p>
+    <div class="w-full flex justify-between">
+        <p class="text-xl font-bold">List Department</p>
+        <a href="/department/add"> <button class="bg-green-400 py-2 px-4 rounded-md text-white">Add New</button></a>
+    </div>
         <div class="relative overflow-x-auto mt-4">
+            @if (\Session::has('success'))
+                <div class="bg-green-300 w-full px-6 py-6 rounded-md mb-4">
+                    {!! \Session::get('success') !!}
+                </div>
+            @endif
             <table class="w-full text-sm text-left rtl:text-right bg-white shadow-lg">
                 <thead class="text-xs text-gray-700 uppercase border-b ">
                     <tr>
