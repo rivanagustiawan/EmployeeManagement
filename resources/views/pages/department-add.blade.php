@@ -9,7 +9,7 @@
                     {!! \Session::get('error') !!}
                 </div>
             @endif
-            <form action="/department/add" method="POST">
+            <form action="/department" method="POST">
             @csrf
             <div class="grid grid-cols-2 gap-5">
                     <div class="mb-5 w-full">

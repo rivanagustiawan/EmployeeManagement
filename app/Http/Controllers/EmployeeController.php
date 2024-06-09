@@ -91,7 +91,7 @@ class EmployeeController extends Controller
         if(Gate::denies('update')) {
             return redirect('/employee')->with('error', 'Only Admin / Super Admin Access.');
         }
-        
+
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -128,5 +128,17 @@ class EmployeeController extends Controller
 
 
         return redirect('employee')->with('success', 'Success Edit Employee: '.$request->name);
+    }
+
+    public function destroy($id) {
+        if(Gate::denies('delete')) {
+            return redirect('/employee')->with('error', 'Only Super Admin Access.');
+        }
+
+        Employee::where('id', $id)->delete();
+
+        return redirect('employee')->with('success', 'Success Delete Employee: ');
+
+
     }
 }

@@ -14,10 +14,12 @@ class DepartmentController extends Controller
         $departments = DB::select("SELECT
                                         departments.id,
                                         departments.name,
+                                        departments.deleted_at,
                                         COUNT(employees.id) as total_employee
                                     FROM
                                         departments
                                     LEFT JOIN employees ON employees.department_id = departments.id
+                                    WHERE  departments.deleted_at IS NULL
                                     GROUP BY
                                         departments.id, departments.name;");
 
@@ -83,6 +85,18 @@ class DepartmentController extends Controller
         ]);
 
         return redirect('department')->with('success', 'Success Edit Department');
+
+    }
+
+    public function destroy($id) {
+        if(Gate::denies('delete')) {
+            return redirect('/department')->with('error', 'Only Super Admin Access.');
+        }
+
+        Department::where('id', $id)->delete();
+
+        return redirect('department')->with('success', 'Success Delete Department: ');
+
 
     }
 }

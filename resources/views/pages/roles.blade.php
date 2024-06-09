@@ -4,7 +4,7 @@
 <div class="px-12">
     <div class="w-full flex justify-between">
         <p class="text-xl font-bold">List Roles</p>
-        <a href="/role/add"> <button class="bg-green-400 py-2 px-4 rounded-md text-white">Add New</button></a>
+        <a href="/role/create"> <button class="bg-green-400 py-2 px-4 rounded-md text-white">Add New</button></a>
     </div>
         <div class="relative overflow-x-auto mt-4">
             @if (\Session::has('success'))
@@ -35,8 +35,12 @@
                                 {{ $role->name }}
                             </td>
                             <td class="flex flex-col space-y-2 py-2">
-                                <a href="/role/edit/{{ $role->id }}" class="py-1 text-center text-xs font-light bg-yellow-100">Edit</a>
-                                <a href="#" class="py-1 text-center text-xs font-light bg-red-300">Delete</a>
+                                <a href="/role/{{ $role->id }}/edit" class="py-1 text-center text-xs font-light bg-yellow-100">Edit</a>
+                                <form action="/role/{{ $role->id }}" method="POST" class="w-full">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="py-1 text-xs font-light bg-red-300 w-full">Delete</button>
+                                </form> 
                             </td>
                         </tr>
                     @endforeach

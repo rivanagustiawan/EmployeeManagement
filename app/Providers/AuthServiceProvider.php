@@ -29,7 +29,13 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Gate::define('update', function(User $user){
-            if($user->role === 'super-admin'  ){
+            if($user->role === 'super-admin' || $user->role === 'admin'  ){
+                return true;
+            }
+        });
+
+        Gate::define('delete', function(User $user){
+            if($user->role === 'super-admin'){
                 return true;
             }
         });

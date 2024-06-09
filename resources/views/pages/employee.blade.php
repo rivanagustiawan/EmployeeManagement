@@ -4,7 +4,7 @@
 <div class="px-12">
     <div class="w-full flex justify-between">
         <p class="text-xl font-bold">List Employee</p>
-        <a href="/employee/add"> <button class="bg-green-400 py-2 px-4 rounded-md text-white">Add New</button></a>
+        <a href="/employee/create"> <button class="bg-green-400 py-2 px-4 rounded-md text-white">Add New</button></a>
     </div>
         <div class="relative overflow-x-auto mt-4">
             @if (\Session::has('success'))
@@ -47,7 +47,7 @@
                                 {{ $employee->email }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $employee->department->name }}
+                                {{ $employee->department ? $employee->department->name : '-' }}
                             </td>
                             <td class="px-6 py-4">
                                 <ul>
@@ -57,8 +57,12 @@
                                 @endforeach
                             </td>
                             <td class="flex flex-col space-y-2 py-2">
-                                <a href="/employee/edit/{{ $employee->id }}" class="py-1 text-xs font-light bg-yellow-100 text-center"><button >Edit</button></a> 
-                                <button class="py-1 text-xs font-light bg-red-300">Delete</button>
+                                <a href="/employee/{{ $employee->id }}/edit" class="py-1 text-xs font-light bg-yellow-100 text-center"><button >Edit</button></a>
+                                <form action="/employee/{{ $employee->id }}" method="POST" class="w-full">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="py-1 text-xs font-light bg-red-300 w-full">Delete</button>
+                                </form> 
                             </td>
                         </tr>
                     @endforeach

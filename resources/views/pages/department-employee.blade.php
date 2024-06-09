@@ -13,9 +13,6 @@
                         <th scope="col" class="px-6 py-3">
                             Email
                         </th>
-                        <th scope="col" class="px-6 py-3">
-                            Action
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,9 +23,6 @@
                             </td>
                             <td class="px-6 py-4">
                                 {{ $employee->email }}
-                            </td>
-                            <td class="flex flex-col space-y-2 py-2">
-                                <button class="py-1 text-xs font-light bg-red-300">Edit</button>
                             </td>
                         </tr>
                     @endforeach

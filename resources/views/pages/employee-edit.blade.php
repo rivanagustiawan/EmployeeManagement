@@ -13,7 +13,7 @@
                     {!! \Session::get('error') !!}
                 </div>
             @endif
-            <form action="/employee/update/{{ $employee->id }}" method="POST">
+            <form action="/employee/{{ $employee->id }}" method="POST">
                 @csrf
                 @method('put')
             <div class="grid grid-cols-2 gap-5">

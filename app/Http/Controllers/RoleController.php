@@ -27,7 +27,7 @@ class RoleController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect('role')->with('success', 'Success Add New Department');
+        return redirect('role')->with('success', 'Success Add New Role');
 
     }
 
@@ -53,7 +53,7 @@ class RoleController extends Controller
         if(Gate::denies('update')) {
             return redirect('/role')->with('error', 'Only Admin / Super Admin Access.');
         }
-        
+
         $request->validate([
             'name' => 'required'
         ]);
@@ -63,6 +63,18 @@ class RoleController extends Controller
         ]);
 
         return redirect('role')->with('success', 'Success Edit Role');
+
+    }
+
+    public function destroy($id) {
+        if(Gate::denies('delete')) {
+            return redirect('/role')->with('error', 'Only Super Admin Access.');
+        }
+
+        Role::where('id', $id)->delete();
+
+        return redirect('role')->with('success', 'Success Delete Role: ');
+
 
     }
 }
